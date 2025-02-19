@@ -32,6 +32,10 @@ public class BaseController : MonoBehaviour
     protected virtual void Update()
     {
         HandleAction();
+        if (Input.GetKey(KeyCode.Space))
+        {
+            animationHandler.Jump();
+        }
     }
 
     protected virtual void FixedUpdate()
