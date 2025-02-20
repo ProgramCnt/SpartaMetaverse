@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -18,7 +19,7 @@ public class UIManager : MonoBehaviour
     public Canvas resultCanvas;
     public Canvas inGameUI;
 
-    MiniGameManager miniGameManager;
+    GameManager gameManager;
 
     private void Awake()
     {
@@ -30,7 +31,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        miniGameManager = MiniGameManager.Instance;
+        gameManager = GameManager.Instance;
 
         if (scoreText == null)
         {
@@ -52,15 +53,27 @@ public class UIManager : MonoBehaviour
             return;
         }
 
-        restartButton.onClick.AddListener(miniGameManager.RestartGame);
-        //exitButton.onClick.AddListener();
+        restartButton.onClick.AddListener(gameManager.RestartGame);
+        exitButton.onClick.AddListener(gameManager.ExitGame);
     }
 
-    public void ShowResultCanvas(int lastScore)
+    public void Init()
+    {
+        if (SceneManager.GetActiveScene().name.Equals("MainScene"))
+        {
+
+        }
+        else if(SceneManager.GetActiveScene().name.Equals("MiniGameScene"))
+        {
+            SetInGameScore(0);
+            ShowInfoText();
+        }
+    }
+
+    public void ShowResultCanvas()
     {
         resultCanvas.gameObject.SetActive(true);
         inGameUI.gameObject.SetActive(false);
-        scoreText.text = lastScore.ToString();
         bestScoreText.text = PlayerPrefs.GetInt("bestScore").ToString();
     }
 
@@ -74,6 +87,7 @@ public class UIManager : MonoBehaviour
     public void SetInGameScore(int score)
     {
         inGameScoreText.text = score.ToString();
+        scoreText.text = score.ToString();
     }
 
     public void ShowInfoText()

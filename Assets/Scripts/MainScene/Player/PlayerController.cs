@@ -5,14 +5,6 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerController : BaseController
 {
-    private Camera camera;
-
-    public void Init()
-    {
-        //this.gameManager = gameManager;
-        camera = Camera.main;
-    }
-
     protected override void HandleAction()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");

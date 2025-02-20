@@ -14,13 +14,13 @@ public class Player : MonoBehaviour
 
     bool isFlap = false;
 
-    MiniGameManager miniGameManager;
+    GameManager gameManager;
     UIManager uiManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        miniGameManager = MiniGameManager.Instance;
+        gameManager = GameManager.Instance;
         uiManager = UIManager.Instance;
 
         Time.timeScale = 0f;
@@ -47,9 +47,9 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
-                if (!miniGameManager.isGameStart)
+                if (!gameManager.isGameStart)
                 {
-                    miniGameManager.isGameStart = true;
+                    gameManager.isGameStart = true;
                     uiManager.HideResultCanvas();               //인게임 기능 활성화
                     Time.timeScale = 1;
                     return;
@@ -92,6 +92,7 @@ public class Player : MonoBehaviour
         deathCoolDown = 1f;
 
         animator.SetBool("IsDie", true);
-        miniGameManager.GameOver();
+        PlayerPrefs.SetString("lastGame", "tappy_plane");
+        gameManager.GameOver();
     }
 }
