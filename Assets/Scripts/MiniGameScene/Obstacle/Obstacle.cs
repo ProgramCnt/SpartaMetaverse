@@ -44,7 +44,7 @@ public class Obstacle : MonoBehaviour
     {
         Player player = collision.GetComponent<Player>();
 
-        if (player != null)
+        if (player != null && gameManager.isGameStart)
         {
             int addScore = gameManager.AddScore(1);
             uiManager.SetInGameScore(addScore);

@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("bestScore", currentScore);
         }
 
+        isGameStart = false;
         uiManager.ShowResultCanvas();
     }
 

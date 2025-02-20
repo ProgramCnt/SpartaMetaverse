@@ -17,11 +17,13 @@ public class BaseController : MonoBehaviour
 
     protected AnimationHandler animationHandler;
 
-    private bool isJump = false;
-
     private float speed = 5f;
 
-    private float jumpForce = 3f;
+    protected bool isJump = false;
+    protected float jumpForce = 1f;
+    protected float jumpSpeed = 5f;
+    protected float jumpStartY;
+    protected float jumpTime = 0f;
 
     protected virtual void Awake()
     {
@@ -37,12 +39,6 @@ public class BaseController : MonoBehaviour
     protected virtual void Update()
     {
         HandleAction();
-        if (Input.GetKey(KeyCode.Space))
-        {
-            Vector2 velocity = rigidbody.velocity;
-            velocity.y += jumpForce;
-            rigidbody.velocity = velocity;
-        }
     }
 
     protected virtual void FixedUpdate()
