@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BaseController : MonoBehaviour
@@ -16,7 +17,11 @@ public class BaseController : MonoBehaviour
 
     protected AnimationHandler animationHandler;
 
+    private bool isJump = false;
+
     private float speed = 5f;
+
+    private float jumpForce = 3f;
 
     protected virtual void Awake()
     {
@@ -34,7 +39,9 @@ public class BaseController : MonoBehaviour
         HandleAction();
         if (Input.GetKey(KeyCode.Space))
         {
-            animationHandler.Jump();
+            Vector2 velocity = rigidbody.velocity;
+            velocity.y += jumpForce;
+            rigidbody.velocity = velocity;
         }
     }
 

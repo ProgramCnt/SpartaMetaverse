@@ -92,7 +92,6 @@ public class Player : MonoBehaviour
         deathCoolDown = 1f;
 
         animator.SetBool("IsDie", true);
-        PlayerPrefs.SetString("lastGame", "tappy_plane");
         gameManager.GameOver();
     }
 }

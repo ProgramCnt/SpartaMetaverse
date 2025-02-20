@@ -41,9 +41,6 @@ public class CameraFollow : MonoBehaviour
         right = camera.ScreenToWorldPoint(new Vector2(transform.position.x + cameraWidth / 2, 0)).x;
         bottom = camera.ScreenToWorldPoint(new Vector2(0, transform.position.y - cameraHeight / 2)).y;
         top = camera.ScreenToWorldPoint(new Vector2(0, transform.position.y + cameraHeight / 2)).y;
-
-        offsetX = transform.position.x - target.position.x;
-        offsetY = transform.position.y - target.position.y;
     }
 
     // Update is called once per frame
@@ -53,10 +50,10 @@ public class CameraFollow : MonoBehaviour
         {
             return;
         }
-        
+
         Vector3 pos = transform.position;
-        pos.x = Mathf.Clamp(target.position.x + offsetX, frontRenderer.bounds.min.x - left + 0.9f, frontRenderer.bounds.max.x + right - 1.25f);
-        pos.y = Mathf.Clamp(target.position.y + offsetY, frontRenderer.bounds.min.y - bottom, frontRenderer.bounds.max.y + top);
+        pos.x = Mathf.Clamp(Mathf.Lerp(pos.x, target.position.x, Time.deltaTime * 5), frontRenderer.bounds.min.x - left + 0.9f, frontRenderer.bounds.max.x + right - 1.25f);
+        pos.y = Mathf.Clamp(Mathf.Lerp(pos.y, target.position.y, Time.deltaTime * 5), frontRenderer.bounds.min.y - bottom, frontRenderer.bounds.max.y + top);
         transform.position = pos;
     }
 }
