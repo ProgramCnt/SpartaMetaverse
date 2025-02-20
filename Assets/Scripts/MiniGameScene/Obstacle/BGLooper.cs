@@ -23,20 +23,17 @@ public class BGLooper : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("triggerd" + collision.name);
-
         if (collision.CompareTag("Background"))     //배경 반복을 위한 충돌 감지
         {
-            float widthOfObject = 0f;
             if (collision.GetComponent<BoxCollider2D>() != null)
             {
-                widthOfObject = 20f;        //충돌한 배경의 collider 너비값을 가져옴
-            }
-            Vector3 pos = collision.transform.position;
+                float widthOfObject = collision.GetComponent<BoxCollider2D>().size.x;
+                Vector3 pos = collision.transform.position;
 
-            pos.x += widthOfObject * backgroundCount;                       //collision의 위치를 가져와서 가장 마지막의 background 뒷부분인 x값을 구한다
-            collision.transform.position = pos;
-            return;
+                pos.x += widthOfObject * backgroundCount;                       //collision의 위치를 가져와서 가장 마지막의 background 뒷부분인 x값을 구한다
+                collision.transform.position = pos;
+                return;
+            }
         }
 
         Obstacle obstacle = collision.GetComponent<Obstacle>();     //충돌한 obstacle을 가져옴

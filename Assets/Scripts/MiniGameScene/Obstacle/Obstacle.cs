@@ -15,12 +15,12 @@ public class Obstacle : MonoBehaviour
 
     public float widthPadding = 4f;
 
-    MiniGameManager miniGameManager;
+    GameManager gameManager;
     UIManager uiManager;
 
     private void Start()
     {
-        miniGameManager = MiniGameManager.Instance;
+        gameManager = GameManager.Instance;
         uiManager = UIManager.Instance;
     }
 
@@ -46,7 +46,9 @@ public class Obstacle : MonoBehaviour
 
         if (player != null)
         {
-            uiManager.SetInGameScore(miniGameManager.AddScore(1));
+            int addScore = gameManager.AddScore(1);
+            uiManager.SetInGameScore(addScore);
+            gameManager.UpdateScore(addScore);
         }
     }
 }
